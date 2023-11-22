@@ -57,14 +57,3 @@ class Pokedex:
                 return bool(pokemon.evolutions)
 
         return f"Pokemon '{pokemon_name}' not found in the Pokedex."
-
-# Example usage:
-pokedex = Pokedex()
-
-# Get information about a Pokemon
-print(pokedex.get_pokemon_info("Bulbasaur"))
-
-# Check if a Pokemon has evolutions
-print(pokedex.has_evolutions("Bulbasaur"))
-print(pokedex.has_evolutions("Charmander"))
-print(pokedex.has_evolutions("Pikachu"))

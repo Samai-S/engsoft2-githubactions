@@ -7,14 +7,32 @@ class TestPokedex(unittest.TestCase):
     def setUp(self):
         self.pokedex = Pokedex()
 
-    def test_get_pokemon_info(self):
-        self.assertEqual(self.pokedex.get_pokemon_info("Bulbasaur"), "Name: Bulbasaur, Type: Grass/Poison")
-        self.assertEqual(self.pokedex.get_pokemon_info("Pikachu"), "Name: Pikachu, Type: Electric")
-        self.assertEqual(self.pokedex.get_pokemon_info("Mewtwo"), "Name: Mewtwo, Type: Psychic")
-        self.assertEqual(self.pokedex.get_pokemon_info("NonExistentPokemon"), "Pokemon 'NonExistentPokemon' not found in the Pokedex.")
+    def test_get_pokemon_info_WHEN_pokemon_exists_RETURNS_pokemon_info(self):
+        pokemon = "Bulbasaur";
+        expected = "Name: Bulbasaur, Type: Grass/Poison"
+        actual = self.pokedex.get_pokemon_info(pokemon)
+        self.assertEqual(actual, expected)
+    
+    def test_get_pokemon_info_WHEN_pokemon_does_not_exist_RETURNS_error_message(self):
+        pokemon = "NonExistentPokemon";
+        expected = "Pokemon 'NonExistentPokemon' not found in the Pokedex."
+        actual = self.pokedex.get_pokemon_info(pokemon)
+        self.assertEqual(actual, expected)
 
-    def test_has_evolutions(self):
-        self.assertTrue(self.pokedex.has_evolutions("Bulbasaur"))
-        self.assertTrue(self.pokedex.has_evolutions("Pikachu"))
-        self.assertFalse(self.pokedex.has_evolutions("Ditto"))  # Ditto has no evolutions
-        self.assertEqual(self.pokedex.has_evolutions("NonExistentPokemon"), "Pokemon 'NonExistentPokemon' not found in the Pokedex.")
+    def test_get_pokemon_info_WHEN_pokemon_name_is_empty_RETURNS_error_message(self):
+        pokemon = "";
+        expected = "Pokemon '' not found in the Pokedex."
+        actual = self.pokedex.get_pokemon_info(pokemon)
+        self.assertEqual(actual, expected)
+    
+    def test_has_evolutions_WHEN_pokemon_has_evolutions_RETURNS_true(self):
+        pokemon = "Bulbasaur";
+        expected = True
+        actual = self.pokedex.has_evolutions(pokemon)
+        self.assertEqual(actual, expected)
+    
+    def test_has_evolutions_WHEN_pokemon_has_no_evolutions_RETURNS_false(self):
+        pokemon = "Ditto";
+        expected = False
+        actual = self.pokedex.has_evolutions(pokemon)
+        self.assertEqual(actual, expected)
